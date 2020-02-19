@@ -34,9 +34,9 @@ public class Employee
 	{
 		super();
 		this.id = id;
-		name = name;
+		this.name = name;
 		this.eMailId = eMailId;
-		contact = contact;
+		this.contact = contact;
 		this.dep = dep;
 	}
 
