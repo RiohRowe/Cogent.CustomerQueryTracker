@@ -1,51 +1,99 @@
 package com.rioh.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.rioh.model.Customer;
-import com.rioh.model.Department;
 import com.rioh.model.Employee;
 import com.rioh.service.CustomerService;
 import com.rioh.service.EmployeeService;
 
-@RestController
+// @Response body
+// @Controller
+@RestController // Handels conversion between objects and json
 public class CQTController
 {
 	@Autowired
-	private EmployeeService empServ = new EmployeeService();
+	private EmployeeService empServ;
 
 	@Autowired
-	private CustomerService custServ = new CustomerService();
+	private CustomerService custServ;
+
+	// @GetMapping("/makeEmployee")//Get HTML FORM for creating employee
+	// public ResponseEntity getCreateEmployeeForm()
+	// {
+	// return ResponseEntity<T>);
+	// }
+
+	// EMPLOYEE
 	
-	//EMPLOYEE
-		//Create
-	@GetMapping("/makeEmployee")//Get HTML FORM for creating employee
-	public ModelAndView getCreateEmployeeForm()
+	// Create
+	@PostMapping("makeEmployee")
+	public Employee createNewEmployee(@RequestBody Employee e)
 	{
-		return new ModelAndView("newEmployee", "empObj", new Employee(new Department()));
+		return empServ.insertEmployee(e);
 	}
 
-	@PostMapping("/makeEmployee")
-	public void getNewEmployee(Employee e)
+	// Read
+	@GetMapping("getAllEmployees")
+	public ArrayList<Employee> ReadAllEmployees()
 	{
-		empServ.insertEmployee(e);
-	}
-	
-	//CUSTOMER
-
-	@GetMapping("/makeCustomer")//Get HTML FORM for creating customer
-	public ModelAndView getCreateCustomerForm()
-	{
-		return new ModelAndView("newCustomer", "custObj", new Customer());
+		return empServ.getAllEmployees();
 	}
 
-	@PostMapping("/makeCustomer")
-	public void getNewCustomer(Customer c)
+	// Update
+	@PutMapping("updateEmployee")
+	public Employee updateEmployee(@RequestBody Employee e)
 	{
-		custServ.insertCustomer(c);
+		empServ.updateEmployee(e);
+		return e;
 	}
+
+	// Delete
+	@DeleteMapping("deleteEmployee")
+
+	public void deleteEmployee(@RequestBody Employee e)
+	{
+		empServ.deleteEmployee(e);
+	}
+
+	// CUSTOMER
+	// Create
+
+	@PostMapping("makeCustomer")
+	public Customer createNewCustomer(@RequestBody Customer e)
+	{
+		return custServ.insertCustomer(e);
+	}
+
+	// Read
+	@GetMapping("getAllCustomers")
+	public ArrayList<Customer> ReadAllCustomers()
+	{
+		return custServ.getAllCustomers();
+	}
+
+	// Update
+	@PutMapping("updateCustomer")
+	public Customer updateCustomer(@RequestBody Customer e)
+	{
+		custServ.updateCustomer(e);
+		return e;
+	}
+
+	// Delete
+	@DeleteMapping("deleteCustomer")
+
+	public void deleteCustomer(@RequestBody Customer e)
+	{
+		custServ.deleteCustomer(e);
+	}
+
 }

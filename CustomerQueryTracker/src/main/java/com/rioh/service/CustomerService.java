@@ -15,9 +15,9 @@ public class CustomerService
 	private CustomerRepository custRep;
 	
 	//Create
-	public void insertCustomer(Customer c)
+	public Customer insertCustomer(Customer c)
 	{
-		c = custRep.save(c);
+		return custRep.save(c);
 	}
 	//Read
 	public ArrayList<Customer> getAllCustomers()

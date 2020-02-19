@@ -12,9 +12,9 @@ public class Employee
 	@Id
 	@GeneratedValue
 	private int id;
-	private String Name;
-	private String eMailid;
-	private String Contact; // PhoneNumber/Skype/etc
+	private String name;
+	private String eMailId;
+	private String contact; // PhoneNumber/Skype/etc
 	@OneToOne
 	private Department dep;
 
@@ -29,14 +29,14 @@ public class Employee
 		this.dep = d;
 	}
 
-	public Employee(int id, String name, String eMailid, String contact,
+	public Employee(int id, String name, String eMailId, String contact,
 		Department dep)
 	{
 		super();
 		this.id = id;
-		Name = name;
-		this.eMailid = eMailid;
-		Contact = contact;
+		name = name;
+		this.eMailId = eMailId;
+		contact = contact;
 		this.dep = dep;
 	}
 
@@ -52,32 +52,32 @@ public class Employee
 
 	public String getName()
 	{
-		return Name;
+		return this.name;
 	}
 
 	public void setName(String name)
 	{
-		Name = name;
+		this.name = name;
 	}
 
-	public String geteMailid()
+	public String geteMailId()
 	{
-		return eMailid;
+		return eMailId;
 	}
 
-	public void seteMailid(String eMailid)
+	public void seteMailId(String eMailId)
 	{
-		this.eMailid = eMailid;
+		this.eMailId = eMailId;
 	}
 
 	public String getContact()
 	{
-		return Contact;
+		return this.contact;
 	}
 
 	public void setContact(String contact)
 	{
-		Contact = contact;
+		this.contact = contact;
 	}
 
 	public Department getDep()
@@ -95,10 +95,10 @@ public class Employee
 	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Contact == null) ? 0 : Contact.hashCode());
-		result = prime * result + ((Name == null) ? 0 : Name.hashCode());
+		result = prime * result + ((contact == null) ? 0 : contact.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + ((dep == null) ? 0 : dep.hashCode());
-		result = prime * result + ((eMailid == null) ? 0 : eMailid.hashCode());
+		result = prime * result + ((eMailId == null) ? 0 : eMailId.hashCode());
 		result = prime * result + id;
 		return result;
 	}
@@ -113,19 +113,19 @@ public class Employee
 		if (getClass() != obj.getClass())
 			return false;
 		Employee other = (Employee) obj;
-		if (Contact == null)
+		if (contact == null)
 		{
-			if (other.Contact != null)
+			if (other.contact != null)
 				return false;
 		}
-		else if (!Contact.equals(other.Contact))
+		else if (!contact.equals(other.contact))
 			return false;
-		if (Name == null)
+		if (name == null)
 		{
-			if (other.Name != null)
+			if (other.name != null)
 				return false;
 		}
-		else if (!Name.equals(other.Name))
+		else if (!name.equals(other.name))
 			return false;
 		if (dep == null)
 		{
@@ -134,12 +134,12 @@ public class Employee
 		}
 		else if (!dep.equals(other.dep))
 			return false;
-		if (eMailid == null)
+		if (eMailId == null)
 		{
-			if (other.eMailid != null)
+			if (other.eMailId != null)
 				return false;
 		}
-		else if (!eMailid.equals(other.eMailid))
+		else if (!eMailId.equals(other.eMailId))
 			return false;
 		if (id != other.id)
 			return false;
@@ -149,7 +149,7 @@ public class Employee
 	@Override
 	public String toString()
 	{
-		return "Employee [id=" + id + ", Name=" + Name + ", eMailid=" + eMailid
-			+ ", Contact=" + Contact + ", dep=" + dep + "]";
+		return "Employee [id=" + id + ", Name=" + name + ", eMailId=" + eMailId
+			+ ", Contact=" + contact + ", dep=" + dep + "]";
 	}
 }

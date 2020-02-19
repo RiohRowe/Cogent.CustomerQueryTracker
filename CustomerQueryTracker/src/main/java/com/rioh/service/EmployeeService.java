@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.rioh.dao.DepartmentRepository;
 import com.rioh.dao.EmployeeRepository;
 import com.rioh.model.Employee;
 
@@ -14,10 +15,14 @@ public class EmployeeService
 	@Autowired
 	private EmployeeRepository empR;
 	
+	@Autowired
+	private DepartmentRepository depR;
+	
 	//Create
-	public void insertEmployee(Employee e)
+	public Employee insertEmployee(Employee e)
 	{
-		e = empR.save(e);
+		e.setDep(depR.save(e.getDep()));
+		return empR.save(e);
 	}
 	
 	//Read
@@ -29,10 +34,14 @@ public class EmployeeService
 	//Update
 	public void updateEmployee(Employee e)
 	{
+		depR.save(e.getDep());
 		empR.save(e);
 	}
 	
 	//Delete
-	
+	public void deleteEmployee(Employee e)
+	{
+		empR.delete(e);
+	}
 	
 }
